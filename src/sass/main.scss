@@ -1,7 +1,45 @@
-/*
- * Главный файл стилей.
- * Все паршалы подключаются сюда.
- */
+.gallery {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  max-width: calc(100% - 64px);
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 24px;
+}
 
-// Стили для файла с примером HTML-фрагмента
-@import './example';
+button {
+  border: 1px solid #0066cc;
+  background-color: #0099cc;
+  color: #ffffff;
+  padding: 5px 10px;
+}
+
+button:hover {
+  border: 1px solid #0099cc;
+  background-color: #00aacc;
+  color: #ffffff;
+  padding: 5px 10px;
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+div {
+  padding: 5px 10px;
+}
+
+.is-hidden {
+  display: block;
+  display: none;
+}
+.button > .spinner.is-hidden {
+  display: none;
+}
