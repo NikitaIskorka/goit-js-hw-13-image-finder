@@ -19,12 +19,12 @@ const pixbyApiService = new PixbyApiService()
 const loadMoreBtn = new Btn({ selector: "#button",})
 
 // ОБРАБОТЧИК ВВОДА ЗАПРОСА
-refs.searchForm.addEventListener('change',onChangeSearchForm)
+refs.searchForm.addEventListener('submit',onChangeSearchForm)
 
 
 // ПОИСК ПО ВВОДУ В ИПУТ
 function onChangeSearchForm(e) {
-   
+   e.preventDefault()
     clearGalleryContainer()
     pixbyApiService.query = e.currentTarget.elements.query.value
     pixbyApiService.resetPage()
