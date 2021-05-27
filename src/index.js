@@ -19,12 +19,12 @@ const pixbyApiService = new PixbyApiService()
 const loadMoreBtn = new Btn({ selector: "#button",})
 
 // ОБРАБОТЧИК ВВОДА ЗАПРОСА
-refs.searchForm.addEventListener('click',onChangeSearchForm)
+refs.searchForm.addEventListener('change',onChangeSearchForm)
 
 
 // ПОИСК ПО ВВОДУ В ИПУТ
 function onChangeSearchForm(e) {
-    e.preventDefault()
+   
     clearGalleryContainer()
     pixbyApiService.query = e.currentTarget.elements.query.value
     pixbyApiService.resetPage()
@@ -41,7 +41,11 @@ function onLoadMoreClick() {
 }
 function insertPictureCardMarkup(pictures) {
     const markup = pictureCard(pictures)
-    refs.galleryContainer.insertAdjacentHTML('beforeend',markup)
+    refs.galleryContainer.insertAdjacentHTML('beforeend', markup)
+      window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
 }
 function clearGalleryContainer() {
     refs.galleryContainer.innerHTML=''
@@ -49,7 +53,11 @@ function clearGalleryContainer() {
 
 
 
-
+const element = refs.galleryContainer
+element.scrollIntoView({
+  behavior: 'smooth',
+  block: 'end',
+});
 
 console.log(loadMoreBtn);
 
