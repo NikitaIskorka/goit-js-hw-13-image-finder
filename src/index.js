@@ -24,7 +24,7 @@ refs.searchForm.addEventListener('submit',onChangeSearchForm)
 
 // ПОИСК ПО ВВОДУ В ИПУТ
 function onChangeSearchForm(e) {
-   e.preventDefault()
+   e.preventDefault(1)
     clearGalleryContainer()
     pixbyApiService.query = e.currentTarget.elements.query.value
     pixbyApiService.resetPage()
