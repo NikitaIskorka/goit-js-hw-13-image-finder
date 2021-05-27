@@ -4,6 +4,7 @@ export default class PixbyApiService {
     this.page = 1
     }
   fetchPicturesByName() {
+    
     console.log(this);
     const APIKEY = '21676003-838a5328a33fa763d4846129b'
     const BASEURL = 'https://pixabay.com/api/'

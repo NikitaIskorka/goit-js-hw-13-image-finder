@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import './js/sticky-search'
 import debounce from 'lodash.debounce';
 import notifications from './js/notifications'
 import pictureCard from './templates/picture-card.hbs'
@@ -16,7 +17,7 @@ const refs = {
 }
 
 const pixbyApiService = new PixbyApiService()
-const loadMoreBtn = new Btn({ selector: "#button",})
+const loadMoreBtn = new Btn({ selector: "#button",hidden:'true'})
 
 // ОБРАБОТЧИК ВВОДА ЗАПРОСА
 refs.searchForm.addEventListener('submit',onChangeSearchForm)
@@ -24,11 +25,12 @@ refs.searchForm.addEventListener('submit',onChangeSearchForm)
 
 // ПОИСК ПО ВВОДУ В ИПУТ
 function onChangeSearchForm(e) {
-   e.preventDefault(1)
+    e.preventDefault()
+    loadMoreBtn.show()
     clearGalleryContainer()
     pixbyApiService.query = e.currentTarget.elements.query.value
     pixbyApiService.resetPage()
-    pixbyApiService.fetchPicturesByName().then(insertPictureCardMarkup)
+    pixbyApiService.fetchPicturesByName().then(insertPictureCardMarkup).catch(notifications.error())
 };
 
 // ОБРАБОТЧИК КЛИКА ПО КНОПКЕ LOAD MORE...
@@ -37,8 +39,7 @@ loadMoreBtn.refs.button.addEventListener('click',onLoadMoreClick)
 
 // ЗАГРУЗКА ДОПОЛНИТЕЛЬНЫХ ИЗОБРАЖЕНИЙ ПО КЛИКУ
 function onLoadMoreClick() {
-    pixbyApiService.fetchPicturesByName().then(insertPictureCardMarkup)
-}
+    pixbyApiService.fetchPicturesByName().then(insertPictureCardMarkup).catch(notification.onErrorNotification)}
 function insertPictureCardMarkup(pictures) {
     const markup = pictureCard(pictures)
     refs.galleryContainer.insertAdjacentHTML('beforeend', markup)
@@ -53,11 +54,6 @@ function clearGalleryContainer() {
 
 
 
-const element = refs.galleryContainer
-element.scrollIntoView({
-  behavior: 'smooth',
-  block: 'end',
-});
 
-console.log(loadMoreBtn);
+
 

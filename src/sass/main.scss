@@ -36,10 +36,26 @@ div {
   padding: 5px 10px;
 }
 
-.is-hidden {
+.button {
   display: block;
+  margin: 0 auto;
+}
+
+.button.is-hidden {
   display: none;
 }
+
 .button > .spinner.is-hidden {
   display: none;
+}
+.search-form {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #d5dbdb;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
