@@ -33,8 +33,25 @@ function onChangeSearchForm(e) {
     pixbyApiService.fetchPicturesByName().then(insertPictureCardMarkup).catch(notifications.error())
 };
 
-// ОБРАБОТЧИК КЛИКА ПО КНОПКЕ LOAD MORE...
-loadMoreBtn.refs.button.addEventListener('click',onLoadMoreClick)
+
+
+
+window.addEventListener('scroll',()=>{
+	const {scrollHeight,scrollTop,clientHeight} = document.documentElement;
+	if(scrollTop + clientHeight > scrollHeight - 5){
+		setTimeout(onLoadMoreClick,500);
+
+	}
+});
+
+// window.addEventListener("scroll", () => {
+//   // Scrolled to bottom
+//   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+//    onLoadMoreClick();
+//   }
+// });
+// // ОБРАБОТЧИК КЛИКА ПО КНОПКЕ LOAD MORE...
+// loadMoreBtn.refs.button.addEventListener('click',onLoadMoreClick)
 
 
 // ЗАГРУЗКА ДОПОЛНИТЕЛЬНЫХ ИЗОБРАЖЕНИЙ ПО КЛИКУ
@@ -43,10 +60,10 @@ function onLoadMoreClick() {
 function insertPictureCardMarkup(pictures) {
     const markup = pictureCard(pictures)
     refs.galleryContainer.insertAdjacentHTML('beforeend', markup)
-      window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
+    //   window.scrollTo({
+    //   top: document.documentElement.scrollHeight,
+    //   behavior: 'smooth',
+    // });
 }
 function clearGalleryContainer() {
     refs.galleryContainer.innerHTML=''
